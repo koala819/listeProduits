@@ -1,4 +1,23 @@
 const http = require('http');
+const mysql = require('mysql');
+
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "liste-de-produits"
+
+});
+
+db.connect(function (err) {
+    if (err) throw err;
+    console.log("Connecté à la base de données MySQL!");
+    db.query("SELECT id as 'id', picture as 'picture', name as 'name', price as 'price' FROM product", function (err, result) {
+        if (err) throw err;
+        console.log(result);
+    });
+});
+
 
 function Product(pic, name, price) {
     this.pic = pic;
@@ -19,8 +38,8 @@ products.push(box01, box02, box03, box04, box05, box06);
 
 const serveur = http.createServer(
     (request, response) => {
-        //response.end("hello Wolrd");
-        response.end(JSON.stringify(products))
+        response.end("hello World");
+        //response.end(JSON.stringify(products))
 
     }
 );
