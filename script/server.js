@@ -1,23 +1,22 @@
 const http = require('http');
-const mysql = require('mysql');
+const {
+    Sequelize
+} = require('sequelize');
 
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "liste-de-produits"
-
+const sequelize = new Sequelize("liste-de-produits", "root", "", {
+    dialect: "mysql",
+    host: "localhost"
 });
 
-db.connect(function (err) {
-    if (err) throw err;
-    console.log("Connecté à la base de données MySQL!");
-    db.query("SELECT id as 'id', picture as 'picture', name as 'name', price as 'price' FROM product", function (err, result) {
-        if (err) throw err;
-        console.log(result);
-    });
-});
-
+try {
+    sequelize.authenticate();
+    console.log('Connecté à la base de données MySQL!');
+    sequelize.query("SELECT id as 'id', picture as 'picture', name as 'name', price as 'price' FROM product").then(([results, metadata]) => {
+        console.log(results);
+    })
+} catch (error) {
+    console.error('Impossible de se connecter, erreur suivante :', error);
+}
 
 function Product(pic, name, price) {
     this.pic = pic;
