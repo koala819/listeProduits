@@ -1,24 +1,36 @@
-const http = require('http');
-const {
-    Sequelize
-} = require('sequelize');
+//const http = require('http');
+function populateTableList() {
+    const mysql = require('mysql');
+    const db = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "liste-de-produits"
 
-const sequelize = new Sequelize("liste-de-produits", "root", "", {
-    dialect: "mysql",
-    host: "localhost"
-});
+    });
 
-try {
-    sequelize.authenticate();
-    console.log('Connecté à la base de données MySQL!');
-    sequelize.query("SELECT id as 'id', picture as 'picture', name as 'name', price as 'price' FROM product").then(([results, metadata]) => {
-        console.log(results);
-    })
-} catch (error) {
-    console.error('Impossible de se connecter, erreur suivante :', error);
+
+    db.connect(function (err) {
+        if (err) throw err;
+        console.log("Connecté à la base de données MySQL!");
+        db.query("SELECT * FROM product", function (err, result) {
+            if (err) throw err;
+
+
+            //console.log(result);
+            for (let i = 0; i < result.length; i++) {
+                document.getElementById('productList').innerHTML += '<tr class="text-center"><td class="inline-block align-middle"><img src="' + result[i].picture + '"></td><td class="w-1/4">"' + result[i].name + '"></td><td class="w-1/4">"' + result[i].price + '"€</td><td class="w-1/4"><button class="btn btn-info">View</button></td></tr>';
+                console.log(result[i].picture);
+                console.log(result[i].name);
+                console.log(result[i].price);
+            }
+            //result.forEach(element => console.log(element));
+        });
+    });
 }
 
-function Product(pic, name, price) {
+
+/* function Product(pic, name, price) {
     this.pic = pic;
     this.name = name;
     this.price = price;
@@ -42,4 +54,4 @@ const serveur = http.createServer(
 
     }
 );
-serveur.listen(3000);
+serveur.listen(3000); */

@@ -25,8 +25,8 @@ function populateTableList() {
       console.log(response.current_condition.condition);
     }
   };
-  request.open("GET", "http://localhost:8080/box");
-  request.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+  request.open("GET", "http://127.0.0.1:8080/box");
+  request.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8000");
   request.send();
 
   let listOfProducts = '';
