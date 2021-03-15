@@ -1,13 +1,13 @@
 {
-  "name": "script",
+  "name": "liste_produits",
   "version": "1.0.0",
-  "description": "",
+  "description": "Afficher les produits présents dans une table SQL",
   "main": "box.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "koala819",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"

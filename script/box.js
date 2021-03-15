@@ -1,9 +1,8 @@
 const http = require('http');
-const host = 'localhost';
-const port = 8080;
+const url = require('url')
+const mysql = require('mysql');
 let box = '';
 
-const mysql = require('mysql');
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -21,26 +20,33 @@ db.connect(function (err) {
     console.log(box);
 });
 
+const monServeur = function (requete, reponse) {
+    const page = url.parse(requete.url).pathname;
+    reponse.setHeader("Access-Control-Allow-Origin", "*");
+    switch (page) {
 
+        case '/box':
+            reponse.writeHead(200, {
+                "Content-Type": "application/json"
+            });
+            reponse.end(box);
 
-
-
-const requestListener = function (req, res) {
-    res.setHeader("Content-Type", "application/json");
-    switch (req.url) {
-        case "/box":
-            res.writeHead(200);
-            res.end(box);
-            break
+            break;
         default:
-            res.writeHead(404);
-            res.end(JSON.stringify({
-                error: "Resource not found"
-            }));
+            reponse.writeHead(200, {
+                "Content-Type": "text/html; charset=UTF-8"
+            });
+            reponse.end("<h1>Wrong way !!!</h1>");
     }
-};
+}
 
+const serveur = http.createServer(monServeur);
+
+serveur.listen(8888);
+
+
+/* 
 const server = http.createServer(requestListener);
 server.listen(port, host, () => {
     console.log(`Server is running on http://${host}:${port}`);
-});
+}); */
