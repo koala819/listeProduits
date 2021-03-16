@@ -1,7 +1,18 @@
+const express = require('express')
 const http = require('http');
 const url = require('url')
 const mysql = require('mysql');
 let box = '';
+
+const app = express();
+app.use(express.static('./client'));
+app.listen(8000, () => {
+    console.log("welcome good start !");
+});
+
+app.get("/box", (request, response) => {
+    response.send("coucou");
+})
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -20,7 +31,7 @@ db.connect(function (err) {
     console.log(box);
 });
 
-const monServeur = function (requete, reponse) {
+/* const monServeur = function (requete, reponse) {
     const page = url.parse(requete.url).pathname;
     reponse.setHeader("Access-Control-Allow-Origin", "*");
     if (request.method === 'OPTIONS') {
@@ -44,11 +55,11 @@ const monServeur = function (requete, reponse) {
             });
             reponse.end("<h1>Wrong way !!!</h1>");
     }
-}
+} 
 
 const serveur = http.createServer(monServeur);
 
-serveur.listen(8888);
+serveur.listen(8888);*/
 
 
 /* 
