@@ -1,4 +1,4 @@
-/* const box = document.querySelector('.box');
+const box = document.querySelector('.box');
 const txt = document.querySelector('.txt');
 const loader = document.querySelector('.loader');
 
@@ -10,8 +10,10 @@ window.addEventListener('load', () => {
     })
     .then(data => {
       console.log(data);
+      txt.innerHTML = data.body;
+      loader.className += ' hidden';
     })
-}) */
+})
 
 function populateTableList() {
   fetch(`http://127.0.0.1:8000/box`)

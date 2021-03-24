@@ -16,5 +16,12 @@
 }
 
 .hidden {
-    display: none;
+    animation: disparition 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes disparition {
+    100% {
+        opacity:0;
+        display: none;
+    }
 }
