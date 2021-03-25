@@ -1,23 +1,12 @@
-const box = document.querySelector('.box');
-const txt = document.querySelector('.txt');
 const loader = document.querySelector('.loader');
-
-window.addEventListener('load', () => {
-  fetch('https://jsonplaceholder.typicode.com/posts/1')
-    .then(response => {
-      console.log(response);
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-      txt.innerHTML = data.body;
-      loader.className += ' hidden';
-    })
-})
 
 function populateTableList() {
   fetch(`http://127.0.0.1:8000/box`)
     .then(res => res.json())
+    .then(res => {
+      loader.classList.remove('hidden');
+      return (res)
+    })
     .then(res => {
       return res.map((p) => {
         return '<tr class="text-center">' +
@@ -29,6 +18,8 @@ function populateTableList() {
       })
     })
     .then(pouet => {
+
       document.getElementById('productList').innerHTML = pouet;
+      loader.className += ' hidden';
     })
 }
