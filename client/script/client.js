@@ -1,13 +1,10 @@
-const loader = document.querySelector('.loader');
+const load = '<div class="loader"><img src="img/load.svg"></div>';
 
 function populateTableList() {
   fetch(`http://127.0.0.1:8000/box`)
     .then(res => res.json())
     .then(res => {
-      loader.classList.remove('hidden');
-      return (res)
-    })
-    .then(res => {
+      document.getElementById('loader').innerHTML = load;
       return res.map((p) => {
         return '<tr class="text-center">' +
           '<td class="inline-block align-middle"><img src=' + p.picture + ' ></td>' +
@@ -18,8 +15,10 @@ function populateTableList() {
       })
     })
     .then(pouet => {
+      setTimeout(() => {
+        document.getElementById('productList').innerHTML = pouet;
+        document.getElementById('loader').innerHTML = '';
+      }, 5000)
 
-      document.getElementById('productList').innerHTML = pouet;
-      loader.className += ' hidden';
     })
 }
