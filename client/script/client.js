@@ -1,10 +1,11 @@
+const tab = document.getElementById('productList');
 const load = '<div class="loader"><img src="img/load.svg"></div>';
 
 function populateTableList() {
   fetch(`http://127.0.0.1:8000/box`)
     .then(res => res.json())
     .then(res => {
-      document.getElementById('loader').innerHTML = load;
+      tab.insertAdjacentHTML('afterend', load);
       return res.map((p) => {
         return '<tr class="text-center">' +
           '<td class="inline-block align-middle"><img src=' + p.picture + ' ></td>' +
@@ -17,7 +18,7 @@ function populateTableList() {
     .then(pouet => {
       setTimeout(() => {
         document.getElementById('productList').innerHTML = pouet;
-        document.getElementById('loader').innerHTML = '';
+        document.querySelectorAll(".loader").forEach(el => el.remove())
       }, 5000)
 
     })
