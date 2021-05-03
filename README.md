@@ -6,11 +6,11 @@
 [![forthebadge](https://forthebadge.com/images/badges/works-on-my-machine.svg)](https://forthebadge.com)<br><br>
 
 
-# liste de produits
-Projet pour apprendre à créer un objet en JS.<br>
-- [x] Creation de l'objet boitier avec une image, un prix, un nom et on l'affiche dans le HTML. 
-- [x] Utilisation de Node.JS pour stocker l'objet dans une DB
-- [x] Création de la route et récupération de l'objet en format JSON
-- [x] Création d'un loader le temps de charger les images de la base.
+# product list
+Project to learn how to create an object in JS.<br>
+- [x] Creation of the box object with an image, a price, a name and we display it in the HTML. 
+- [x] Use of Node.JS to store the object in a DB.
+- [x] Creation of the route and retrieval of the object in JSON format.
+- [x] Creation of a loader the time to load the images of the base.
 <br>
 <img width="100%" height="800" src="00.jpg">
